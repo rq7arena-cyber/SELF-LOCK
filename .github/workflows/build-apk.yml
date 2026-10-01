@@ -1,4 +1,4 @@
-name: Build SelfLock APK
+name: Build Selflock APK
 on: [push, workflow_dispatch]
 jobs:
   build:
@@ -8,7 +8,9 @@ jobs:
       - name: Unzip project
         run: |
           unzip -o SelfLock-Final-Fixed.zip -d src
-          
+      - name: Fix gradle properties
+        run: |
+          echo "android.useAndroidX=true" >> src/gradle.properties
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
